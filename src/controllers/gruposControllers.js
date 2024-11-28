@@ -1,37 +1,34 @@
 const gruposModel = require('../models/gruposModel');
 
 class GruposControllers {
+    // Obtener grupos
     fetchGrupos = async (req, resp) => {
-        //let data = await gruposModel.fetchGruposAll();
-        const data = "Acabas de presionar la función Fetch para grupos 😏";
-        resp.status(200).json({ message: data });
+        const data = [
+            { id_grupo: 1, nombre_grupo: "Grupo Estático 1", descripcion: "Descripción estática 1", fecha_creacion: "2024-01-01" },
+            { id_grupo: 2, nombre_grupo: "Grupo Estático 2", descripcion: "Descripción estática 2", fecha_creacion: "2024-01-02" }
+        ];
+        console.log("Función fetchGrupos ejecutada.");
+        resp.status(200).json({ message: "Datos estáticos devueltos con éxito", data });
     }
 
+    // Crear grupo
     createGrupos = async (req, resp) => {
-        //let record = await gruposModel.createGrupos(req.body);
-        const data = "Acabas De Precionar La Función Create para gurpos😢";
-        resp.status(200).json({ message: data });
+        console.log("Función createGrupos ejecutada con los siguientes datos:", req.body);
+        const data = { id_grupo: 3, ...req.body };
+        resp.status(201).json({ message: "Grupo creado con éxito (simulado)", data });
     }
 
+    // Actualizar grupo
     updateGrupos = async (req, resp) => {
-        /*try {
-            let record = await gruposModel.updateGrupos(req.params.id_grupo, req.body);
-            if (record) {
-                resp.status(200).json({ message: 'Grupo actualizado', record });
-            } else {
-                resp.status(404).json({ message: 'Grupo no encontrado' });
-            }
-        } catch (error) {
-            resp.status(500).json({ message: 'Error actualizando grupo', error: error.message });
-        }*/
+        console.log(`Función updateGrupos ejecutada para el ID: ${req.params.id_grupo}`);
+        const data = { id_grupo: req.params.id_grupo, ...req.body };
+        resp.status(200).json({ message: `Grupo con ID ${req.params.id_grupo} actualizado (simulado)`, data });
     };
 
+    // Eliminar grupo
     deleteGrupos = async (req, resp) => {
-       /* let deletedCount = await gruposModel.deleteGrupo(req.params.id_grupo);
-        resp.status(200).json({
-            message: `Grupo con ID ${req.params.id_grupo} eliminado con éxito`,
-            deletedCount
-        });*/
+        console.log(`Función deleteGrupos ejecutada para el ID: ${req.params.id_grupo}`);
+        resp.status(200).json({ message: `Grupo con ID ${req.params.id_grupo} eliminado (simulado)` });
     }
 }
 
